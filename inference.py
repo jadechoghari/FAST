@@ -196,7 +196,8 @@ if __name__ == '__main__':
     parser.add_argument('--cpu', action='store_true')
 
     args = parser.parse_args()
-    mmcv.mkdir_or_exist("./speed_test")
+    # mmcv.mkdir_or_exist("./speed_test")
+    os.makedirs("./speed_test", exist_ok=True)
     config_name = os.path.basename(args.config)
     logging.basicConfig(filename=f'./speed_test/{config_name}.txt', level=logging.INFO)
 
