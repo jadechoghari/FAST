@@ -5,7 +5,7 @@ import sys
 # from mmcv import Config
 from mmengine.config import Config
 import mmcv
-from dataset import build_data_loader
+# from dataset import build_data_loader
 from models import build_model
 from models.utils import fuse_module, rep_model_convert
 from utils import ResultFormat, AverageMeter
@@ -36,7 +36,7 @@ def report_speed(model, data, speed_meters, batch_size=1, times=10):
         logging.info('FPS: %.1f' % (1.0 / speed_meters['total_time'].avg))
 
 
-def test(test_loader, model, cfg):
+def test(model, cfg):
 
     rf = ResultFormat(cfg.data.test.type, cfg.test_cfg.result_path)
 
@@ -126,14 +126,14 @@ def main(args):
     cfg.batch_size = args.batch_size
 
     # data loader
-    data_loader = build_data_loader(cfg.data.test)
-    test_loader = torch.utils.data.DataLoader(
-        data_loader,
-        batch_size=args.batch_size,
-        shuffle=False,
-        num_workers=args.worker,
-        pin_memory=False
-    )
+    # data_loader = build_data_loader(cfg.data.test)
+    # test_loader = torch.utils.data.DataLoader(
+    #     data_loader,
+    #     batch_size=args.batch_size,
+    #     shuffle=False,
+    #     num_workers=args.worker,
+    #     pin_memory=False
+    # )
     # model
     model = build_model(cfg.model)
     
@@ -179,7 +179,7 @@ def main(args):
     # print(flops, params)
     
     model.eval()
-    test(test_loader, model, cfg)
+    test(model, cfg)
 
 
 if __name__ == '__main__':
