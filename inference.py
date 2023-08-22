@@ -4,12 +4,12 @@ import os
 import sys
 # from mmcv import Config
 from mmengine.config import Config
-import mmcv
+# import mmcv
 # from dataset import build_data_loader
 from models import build_model
 from models.utils import fuse_module, rep_model_convert
 from utils import ResultFormat, AverageMeter
-from mmcv.cnn import get_model_complexity_info
+# from mmcv.cnn import get_model_complexity_info
 import logging
 import warnings
 warnings.filterwarnings('ignore')
