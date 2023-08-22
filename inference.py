@@ -2,7 +2,8 @@ import torch
 import argparse
 import os
 import sys
-from mmcv import Config
+# from mmcv import Config
+from mmengine.config import Config
 import mmcv
 from dataset import build_data_loader
 from models import build_model
