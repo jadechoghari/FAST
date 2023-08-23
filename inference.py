@@ -87,8 +87,9 @@ def test(model, cfg):
             quad = bbox2poly(poly2bbox(polygon)).tolist()
             crop_img_list.append(crop_img(img, quad).astype('uint8'))
 
-    for img in crop_img_list:
-        print(img.shape)
+    for idx, img in enumerate(crop_img_list):
+        img = Image.fromarray(img)
+        img.save(f"crop_{idx}")
 
     if cfg.report_speed:
         report_speed(model, data, speed_meters, cfg.batch_size)
