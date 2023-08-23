@@ -11,7 +11,8 @@ import cv2
 # try:
 import pyximport
 pyximport.install()
-from ..post_processing import ccl_cuda
+# from ..post_processing import ccl_cuda
+from models.post_processing.ccl import ccl_cuda
 # except:
 #     print("ccl_cuda is not installed!")
 
