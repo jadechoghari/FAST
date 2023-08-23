@@ -89,7 +89,7 @@ def test(model, cfg):
 
     for idx, img in enumerate(crop_img_list):
         img = Image.fromarray(img)
-        img.save(f"crop_{idx}")
+        img.save(f"crop_{idx}.png")
 
     if cfg.report_speed:
         report_speed(model, data, speed_meters, cfg.batch_size)
