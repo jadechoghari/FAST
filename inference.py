@@ -85,6 +85,7 @@ def test(model, cfg):
         crop_img_list = []
         for polygon in raw_contours:
             quad = bbox2poly(poly2bbox(polygon)).tolist()
+            print("Quad:", quad)
             crop_img_list.append(crop_img(img, quad).astype('uint8'))
 
     for idx, img in enumerate(crop_img_list):
