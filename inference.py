@@ -81,7 +81,7 @@ def test(model, cfg):
 
     # save result
     rf.write_result("result", outputs['results'][0])
-    # results[image_name] = outputs['results'][index]
+    results["image.png"] = outputs['results'][0]
 
     if not cfg.report_speed:
         results = json.dumps(results)
