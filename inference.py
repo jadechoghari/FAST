@@ -18,6 +18,7 @@ import json
 from augmentations import SquarePadResizeNorm
 from PIL import Image
 import requests
+import numpy as np
 
 
 def report_speed(model, data, speed_meters, batch_size=1, times=10):
@@ -58,6 +59,8 @@ def test(model, cfg):
 
     transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
     data["imgs"] = transform(image)[0]
+    img_metas = {"org_img_size": [np.array(image).shape[:2]]}
+    data["img_metas"] = img_metas
 
     if not args.cpu:
         data['imgs'] = data['imgs'].cuda(non_blocking=True)
