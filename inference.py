@@ -74,6 +74,8 @@ def test(model, cfg):
     with torch.no_grad():
         outputs = model(**data)
 
+    print("Outputs:", outputs)
+
     if cfg.report_speed:
         report_speed(model, data, speed_meters, cfg.batch_size)
 
