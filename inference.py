@@ -58,8 +58,10 @@ def test(model, cfg):
     image = Image.open(requests.get(url, stream=True).raw)
 
     transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
-    data["imgs"] = transform(image)[0]
-    img_metas = {"org_img_size": [np.array(image).shape[:2]]}
+    imgs = transform(image)[0]
+    data["imgs"] = imgs
+    img_metas = {"org_img_size": [np.array(image).shape[:2]],
+                 "img_size": [imgs.shape[:2]]}
     data["img_metas"] = img_metas
 
     if not args.cpu:
