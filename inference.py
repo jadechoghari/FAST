@@ -57,7 +57,7 @@ def test(model, cfg):
     data = dict()
 
     url = "https://raw.githubusercontent.com/locuslab/T-MARS/main/sample_text_detect.jpg"
-    url = "https://huggingface.co/datasets/nielsr/test-image/blob/main/test_image.png"
+    url = "https://huggingface.co/datasets/nielsr/test-image/resolve/main/test_image.png"
     image = Image.open(requests.get(url, stream=True).raw)
 
     transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
