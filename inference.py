@@ -57,6 +57,7 @@ def test(model, cfg):
     data = dict()
 
     url = "https://raw.githubusercontent.com/locuslab/T-MARS/main/sample_text_detect.jpg"
+    url = "https://huggingface.co/datasets/nielsr/test-image/blob/main/test_image.png"
     image = Image.open(requests.get(url, stream=True).raw)
 
     transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
@@ -64,7 +65,7 @@ def test(model, cfg):
     batch_size = x.shape[0]
     data["imgs"] = x
     img_metas = {'filename': [None for i in range(batch_size)],
-                'org_img_size': torch.ones((batch_size,2)).long()*512,
+                'org_img_size': torch.ones((batch_size,2)).long()*256, # TODO change
                 'img_size': torch.ones((batch_size,2)).long()*512,
     }
     data["img_metas"] = img_metas
