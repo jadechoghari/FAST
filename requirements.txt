@@ -1,0 +1,11 @@
+# Python 3 requirements
+editdistance
+Polygon3
+pyclipper
+Cython
+mmcv
+prefetch_generator
+scipy
+yacs
+tqdm
+opencv-python
