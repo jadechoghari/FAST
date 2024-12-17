@@ -59,8 +59,29 @@ def test(model, cfg):
     url = "http://images.cocodataset.org/val2017/000000039769.jpg"
     image = Image.open(requests.get(url, stream=True).raw)
 
-    transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
-    x = transform(image)[0]
+    # transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
+    # x = transform(image)[0]
+
+    # author's image processing logic taken from : https://github.com/czczup/FAST/blob/6bdfd251f04f800b5b20117444eee10a770862ad/config/fast/ic17mlt/fast_tiny_ic17mlt_640.py#L43-L48
+    import torchvision.transforms as transforms
+    import cv2
+    short_size = 640
+    img = np.array(image)
+    h, w = img.shape[0:2]
+    scale = short_size * 1.0 / min(h, w)
+    h = int(h * scale + 0.5)
+    w = int(w * scale + 0.5)
+    if h % 32 != 0:
+        h = h + (32 - h % 32)
+    if w % 32 != 0:
+        w = w + (32 - w % 32)
+    img = cv2.resize(img, dsize=(w, h))
+    img = image.convert('RGB')
+    img = transforms.ToTensor()(img)
+    img = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(img)
+    x = img
+    x = x.unsqueeze(0)
+    
     batch_size = x.shape[0]
     data["imgs"] = x
     img_metas = {'filename': [None for i in range(batch_size)],
