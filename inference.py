@@ -64,7 +64,6 @@ def test(model, cfg):
 
     # author's image processing logic taken from : https://github.com/czczup/FAST/blob/6bdfd251f04f800b5b20117444eee10a770862ad/config/fast/ic17mlt/fast_tiny_ic17mlt_640.py#L43-L48
     import torchvision.transforms as transforms
-    import cv2
     short_size = 640
     img = np.array(image)
     h, w = img.shape[0:2]
@@ -75,7 +74,8 @@ def test(model, cfg):
         h = h + (32 - h % 32)
     if w % 32 != 0:
         w = w + (32 - w % 32)
-    img = cv2.resize(img, dsize=(w, h))
+    img = Image.fromarray(img)
+    img = img.resize((w, h), resample=PIL.Image.BILINEAR)
     img = image.convert('RGB')
     img = transforms.ToTensor()(img)
     img = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(img)
