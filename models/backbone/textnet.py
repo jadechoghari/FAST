@@ -25,6 +25,7 @@ class TextNet(nn.Module):
                 m.bias.data.zero_()
     
     def forward(self, x):
+        print("x after processing: ", x[0][0][3][:10])
         x = self.first_conv(x)
         output = list()
         
@@ -43,6 +44,7 @@ class TextNet(nn.Module):
         for block in self.stage4:
             x = block(x)
         output.append(x)
+        print("x final output: ", output[-1][0][10][12][:10])
         
         return output
     
