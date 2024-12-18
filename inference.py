@@ -76,7 +76,7 @@ def test(model, cfg):
         w = w + (32 - w % 32)
     img = Image.fromarray(img)
     img = img.resize((w, h), resample=PIL.Image.BILINEAR)
-    img = image.convert('RGB')
+    img = img.convert('RGB')
     img = transforms.ToTensor()(img)
     img = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])(img)
     x = img
