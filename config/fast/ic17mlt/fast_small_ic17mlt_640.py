@@ -56,3 +56,9 @@ train_cfg = dict(
     pretrain='pretrained/fast_small_in1k_epoch_299.pth'
     # https://github.com/czczup/FAST/releases/download/release/fast_small_in1k_epoch_299.pth
 )
+test_cfg = dict(
+    result_path='outputs/submit_ctw/',
+    min_area=250,
+    min_score=0.88,
+    bbox_type='rect',
+)
