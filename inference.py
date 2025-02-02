@@ -85,8 +85,8 @@ def test(model, cfg):
     batch_size = x.shape[0]
     data["imgs"] = x
     img_metas = {'filename': [None for i in range(batch_size)],
-                'org_img_size': torch.ones((batch_size,2)).long()*256, # TODO change
-                'img_size': torch.ones((batch_size,2)).long()*512,
+                'org_img_size': torch.tensor([[image.height, image.width] for _ in range(batch_size)]).long(),
+                'img_size': torch.tensor([[h, w] for _ in range(batch_size)]).long()
     }
     data["img_metas"] = img_metas
 
