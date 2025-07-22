@@ -56,7 +56,7 @@ def test(model, cfg):
     # prepare input
     data = dict()
 
-    url = "http://images.cocodataset.org/val2017/000000039769.jpg"
+    url = "https://huggingface.co/datasets/Raghavan/fast_model_samples/resolve/main/img657.jpg"
     image = Image.open(requests.get(url, stream=True).raw)
 
     # transform = SquarePadResizeNorm(img_size=512, norm_mean=(0.485, 0.456, 0.406), norm_std=(0.229, 0.224, 0.225))
